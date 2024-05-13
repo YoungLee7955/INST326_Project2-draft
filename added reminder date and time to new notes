@@ -1,0 +1,27 @@
+# New reminder fields
+        ttk.Label(self, text="Reminder Date:").grid(row=2, column=0, padx=10, pady=5)
+        self.reminder_date = ttk.Entry(self, width=20)
+        self.reminder_date.grid(row=2, column=1, padx=10, pady=5)
+
+        ttk.Label(self, text="Reminder Time:").grid(row=2, column=2, padx=10, pady=5)
+        self.reminder_time = ttk.Entry(self, width=20)
+        self.reminder_time.grid(row=2, column=3, padx=10, pady=5)
+
+
+
+    def set_reminder(self):
+        # Get note details
+        title = self.note_title.get()
+        text = self.note_text.get("1.0", tk.END).strip()
+
+        # Get reminder details
+        reminder_date = self.reminder_date.get()
+        reminder_time = self.reminder_time.get()
+
+        # Store reminder information
+        reminder = f"{reminder_date} {reminder_time}"
+        # Store note with reminder
+        new_note = MakeNote({"title": title, "text": text, "reminder": reminder, "meta": ""})
+        self.notebook.append(new_note)
+        self.update_note_list()
+        self.destroy()
